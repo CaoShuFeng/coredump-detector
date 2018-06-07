@@ -155,6 +155,7 @@ func podHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		glog.Error(err)
 	}
+	w.Header().Set("Content-Type", "application/json")
 	if _, err := w.Write(resp); err != nil {
 		glog.Error(err)
 	}
