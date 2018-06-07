@@ -139,7 +139,9 @@ func podHandler(w http.ResponseWriter, r *http.Request) {
 	deserializer := codecs.UniversalDeserializer()
 	if _, _, err := deserializer.Decode(body, nil, &ar); err != nil {
 		glog.Error(err)
-		reviewResponse = toAdmissionResponse(err, http.StatusInternalServerError)
+		w.WriteHeader(http.StatusBadRequest)
+		io.WriteString(w, "Failed to decode request body err: " + err.Error())
+		return
 	} else {
 		reviewResponse = mutatePod(ar)
 	}
