@@ -24,7 +24,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"time"
 
 	"github.com/golang/glog"
 	"github.com/mattbaird/jsonpatch"
@@ -36,10 +35,12 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 	k8sjson "k8s.io/apimachinery/pkg/runtime/serializer/json"
+	k8sclock "k8s.io/apimachinery/pkg/util/clock"
 )
 
 var scheme = runtime.NewScheme()
 var codecs = serializer.NewCodecFactory(scheme)
+var clock k8sclock.Clock = &k8sclock.RealClock{}
 
 const annotationKey = `coredump.fujitsu.com/pvcname`
 
@@ -140,7 +141,7 @@ func podHandler(w http.ResponseWriter, r *http.Request) {
 	if _, _, err := deserializer.Decode(body, nil, &ar); err != nil {
 		glog.Error(err)
 		w.WriteHeader(http.StatusBadRequest)
-		io.WriteString(w, "Failed to decode request body err: " + err.Error())
+		io.WriteString(w, "Failed to decode request body err: "+err.Error())
 		return
 	} else {
 		reviewResponse = mutatePod(ar)
@@ -249,7 +250,7 @@ func mutatePod(ar v1beta1.AdmissionReview) *v1beta1.AdmissionResponse {
 	newPod := pod.DeepCopy()
 
 	// append the volume to volume list
-	volumeName := fmt.Sprintf("%s-%d", pvc, time.Now().Unix())
+	volumeName := fmt.Sprintf("%s-%d", pvc, clock.Now().Unix())
 	volume := corev1.Volume{
 		volumeName,
 		corev1.VolumeSource{
