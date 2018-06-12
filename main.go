@@ -301,6 +301,8 @@ func mutatePod(ar v1beta1.AdmissionReview) *v1beta1.AdmissionResponse {
 	reviewResponse := v1beta1.AdmissionResponse{}
 	reviewResponse.Allowed = true
 	reviewResponse.Patch = patch
+	var patchType = v1beta1.PatchTypeJSONPatch
+	reviewResponse.PatchType = &patchType
 	return &reviewResponse
 }
 
