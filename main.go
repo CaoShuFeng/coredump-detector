@@ -24,6 +24,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"sort"
 
 	"github.com/golang/glog"
 	"github.com/mattbaird/jsonpatch"
@@ -323,6 +324,7 @@ func createPatch(oldPod, newPod []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	sort.Sort(jsonpatch.ByPath(patchOperations))
 	var b bytes.Buffer
 	b.WriteString("[")
 	l := len(patchOperations)
