@@ -11,7 +11,7 @@
 # limitations under the License.
 
 build:
-	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o webhook .
+	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o coredump-detector .
 test:
 	go test
 
