@@ -30,7 +30,7 @@ cert_dir=${CERT_DIR:-`pwd`/output}
 
 mkdir -p "$cert_dir"
 
-use_cn=false
+use_cn=true
 
 sans="IP:${cert_ip}"
 if [[ -n "${extra_sans}" ]]; then

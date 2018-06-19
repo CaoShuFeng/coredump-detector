@@ -1,0 +1,5 @@
+coredump-detector
+
+gencerts/output/
+
+*.yaml
