@@ -9,7 +9,7 @@ Coredump-detector is a MutatingAdmissionWebhook. It mounts a persistent volume c
 See INSTALL_OUT_CLUSTER.md
 
 ### how to deploy it as a k8s service
-
+See INSTALL_AS_SERVICE.md
 
 ## How tenant use the feature
 

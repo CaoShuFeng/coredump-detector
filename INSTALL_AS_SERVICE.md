@@ -33,7 +33,7 @@ ca.crt  client.crt  client.key  server.cert  server.key
 For more information about certificates: https://kubernetes.io/docs/concepts/cluster-administration/certificates/
 
 ## Config the kube-apiserver
-1. enable the MutatingAdmissionWebhook admission controller add the follow options to kube-apiserver
+1. enable the MutatingAdmissionWebhook admission controller, add the follow options to kube-apiserver
 ```
 --enable-admission-plugins=...,MutatingAdmissionWebhook,... --admission-control-config-file=/etc/kubernetes/admission-config.yaml
 ```
