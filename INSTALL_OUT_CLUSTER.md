@@ -4,7 +4,7 @@ This is a cluster admin instruction about how to deploy coredump-detector webhoo
 It's recommend to read [this document](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) before you going on.
 
 ## Prepare the node(s)
-1. Make sure your container runtime could generate coredump files inside container in directory `/var/coredump`. If you are using namespace based runtime, you usually need to run command `echo "/var/coredump/core_pattern.%e_%t" > /proc/sys/kernel/core_pattern` in your node.
+1. Make sure your container runtime could generate coredump files inside container in directory `/var/coredump`. If you are using namespace based runtime, you usually need to run command `echo "/var/coredump/core_%e_%t" > /proc/sys/kernel/core_pattern` in your node.
 2. lable the node
 ```shell
 $ kubectl label nodes nodeName coredump=true
