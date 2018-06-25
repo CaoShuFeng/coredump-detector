@@ -10,13 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-IMAGE = caoshufeng/coredump-detector
-TAG = v0.2
+FROM alpine:latest
 
-build:
-	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o coredump-detector .
-	docker build --no-cache -t $(IMAGE):$(TAG) .
-test:
-	go test
-
-.PHONY: build
+ADD coredump-detector /coredump-detector
+ENTRYPOINT ["/coredump-detector"]
