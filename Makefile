@@ -16,7 +16,7 @@ TAG = v0.2
 build:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o coredump-detector .
 
-build-container: coredump-detector
+build-container: build
 	docker build --no-cache -t $(IMAGE):$(TAG) .
 test:
 	go test
