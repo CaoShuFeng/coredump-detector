@@ -13,7 +13,7 @@ $ kubectl label nodes nodeName coredump=true
 ## Prepare the docker image
 1. build the docker image
 ```shell
-make build
+make build-container
 ```
 
 2. push the docker image to REPOSITORY
